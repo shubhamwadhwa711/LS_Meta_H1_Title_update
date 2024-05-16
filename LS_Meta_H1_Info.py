@@ -65,6 +65,8 @@ start_time = time.time()
 
 # infodf = pd.read_excel('Meta_H1_Info-121123.xlsx')
 infodf = pd.read_excel(file_name, "New Website Plan Draft",)
+infodf = infodf.head(72)
+
 mapdf = pd.read_excel(file_name, "Meta Data Mapping")
 
 
