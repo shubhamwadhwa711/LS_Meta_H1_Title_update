@@ -1199,14 +1199,17 @@ for index, (
                     params = row["params"]
                     oldMeta = json.loads(params)
                     if title_id_value==meta_id_value and title_com_value==meta_com_value:
-                        oldMeta=json.loads(updated_string)
-                    newMeta = New_Meta
+                        # oldMeta=json.loads(updated_string)
+                        params = json.loads(params)
+                        params["menu-meta_description"] = New_Meta
+                        updated_string = json.dumps(params)
+                    # newMeta = New_Meta
 
-                    if newMeta == "":
-                        print("Invalid text or does not end with a period.")
-                    elif newMeta[-1] == '"':
-                        newMeta = newMeta[:-1]
-                        oldMeta["menu-meta_description"] = newMeta
+                    # if newMeta == "":
+                    #     print("Invalid text or does not end with a period.")
+                    # elif newMeta[-1] == '"':
+                    #     newMeta = newMeta[:-1]
+                    #     oldMeta["menu-meta_description"] = newMeta
 
                     # if newMeta[-1] == '"':
                     #     newMeta = newMeta[:-1]
@@ -1216,7 +1219,7 @@ for index, (
                     update_stmt = (
                         update(tablemenu)
                         .where(tablemenu.c.id == int(meta_id_value))
-                        .values(params=json.dumps(oldMeta))
+                        .values(params=updated_string)
                     )
                     infodf.loc[
                         (infodf["map_id"] == map_id) & (infodf["map_data"] == map_data),
